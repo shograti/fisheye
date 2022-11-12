@@ -31,5 +31,25 @@ function photographerFactory(data) {
 
     return article;
   }
-  return { name, picture, generateUserCard };
+
+  function generateUserHeader() {
+    const article = document.createElement('article');
+    const h1 = document.createElement('h1');
+    const h2 = document.createElement('h2');
+    const p = document.createElement('p');
+    const img = document.createElement('img');
+
+    h1.textContent = name;
+    h2.textContent = `${city}, ${country}`;
+    p.textContent = tagline;
+    img.setAttribute('src', picture);
+
+    article.appendChild(h1);
+    article.appendChild(h2);
+    article.appendChild(p);
+
+    return { article, img };
+  }
+
+  return { name, picture, generateUserCard, generateUserHeader };
 }
