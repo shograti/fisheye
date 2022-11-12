@@ -11,6 +11,16 @@ async function displayHeader(photographer) {
   photographHeader.appendChild(img);
 }
 
+async function displayMedias(relatedMedias) {
+  const mediasGrid = document.querySelector('.medias-grid');
+  relatedMedias.forEach((relatedMedia) => {
+    const mediaModel = mediaFactory(relatedMedia);
+    const media = mediaModel.generateMediaGrid();
+    media.setAttribute('id', mediaModel.id);
+    mediasGrid.appendChild(media);
+  });
+}
+
 async function init() {
   const { photographers, medias } = await getData();
 
@@ -21,7 +31,13 @@ async function init() {
   const photographer = photographers.filter(
     (photographer) => photographer.id === parseInt(id)
   );
+
+  const relatedMedias = medias.filter(
+    (media) => media.photographerId === parseInt(id)
+  );
+
   displayHeader(photographer[0]);
+  displayMedias(relatedMedias);
 }
 
 init();
