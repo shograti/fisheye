@@ -30,6 +30,7 @@ function mediaFactory(data) {
     if (image) {
       const img = document.createElement('img');
       img.setAttribute('src', imageMedia);
+      img.classList.add('media');
       article.prepend(img);
       return article;
     }
@@ -37,6 +38,7 @@ function mediaFactory(data) {
     if (video) {
       const videoPlayer = document.createElement('video');
       videoPlayer.setAttribute('src', videoMedia);
+      videoPlayer.classList.add('media');
       article.prepend(videoPlayer);
       return article;
     }
