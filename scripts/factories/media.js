@@ -44,5 +44,21 @@ function mediaFactory(data) {
     }
   }
 
-  return { id, generateMediaGrid };
+  function generateLightboxMedia() {
+    if (image) {
+      const media = document.createElement('img');
+      media.setAttribute('src', imageMedia);
+      media.classList.add('lightbox-media');
+      return media;
+    }
+
+    if (video) {
+      const media = document.createElement('video');
+      media.setAttribute('src', videoMedia);
+      media.classList.add('lightbox-media');
+      return media;
+    }
+  }
+
+  return { id, imageMedia, videoMedia, generateMediaGrid, generateLightboxMedia };
 }

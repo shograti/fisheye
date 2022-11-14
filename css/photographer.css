@@ -15,7 +15,6 @@ section {
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -134,6 +133,52 @@ section {
 .heart-icon {
     width: 17.5px;
     height: 18.35px;
+}
+
+/* Lightbox */
+
+.lightbox {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 360px;
+    top: 30px;
+}
+
+.chevron-right,
+.chevron-left {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    transform: translateX(-50%);
+}
+
+.chevron-right {
+    right: 340px;
+
+}
+
+.chevron-left {
+    left: 360px;
+
+}
+
+.lightbox-media {
+    width: 1050px;
+    height: 900px;
+    object-fit: cover;
 }
 
 
