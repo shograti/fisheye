@@ -15,7 +15,8 @@
   </header>
   <main id="main">
     <section class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact_button" aria-label="Contacter le photographe"
+        onclick="displayModal()">Contactez-moi</button>
     </section>
 
     <section class="photograph-filters">
@@ -36,9 +37,11 @@
   </main>
 
   <div class="lightbox" id="lightbox">
-    <img src="./assets/icons/close.svg" alt="" class="close-icon">
-    <img src="./assets/icons/chevron-left.png" id="previous-image-button" class="chevron-left" alt="Précédent">
-    <img src="./assets/icons/chevron-right.png" id="next-image-button" class="chevron-right" alt="Suivant">
+    <img src="./assets/icons/close.svg" aria-label="Fermer la lightbox" alt="" class="close-icon">
+    <img src="./assets/icons/chevron-left.png" aria-label="Photo précédente" id="previous-image-button"
+      class="chevron-left" alt="Précédent">
+    <img src="./assets/icons/chevron-right.png" aria-label="Photo suivante" id="next-image-button" class="chevron-right"
+      alt="Suivant">
   </div>
 
 
@@ -47,14 +50,20 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="assets/icons/close-modal.svg" onclick="closeModal()" />
       </header>
       <form>
         <div>
           <label>Prénom</label>
-          <input />
+          <input name="firstName" />
+          <label>Nom</label>
+          <input name="lastName" />
+          <label>Email</label>
+          <input name="email" />
+          <label>Votre message</label>
+          <textarea name="message"></textarea>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <button class="submit_button">Envoyer</button>
       </form>
     </div>
   </div>
