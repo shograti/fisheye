@@ -20,7 +20,7 @@ function sortMedias(relatedMedias, option) {
         a.title > b.title ? 1 : b.title > a.title ? -1 : 0
       );
     default:
-      break;
+      return relatedMedias.sort((a, b) => b.likes - a.likes);
   }
 }
 
@@ -48,10 +48,37 @@ async function displayMedias(relatedMedias) {
     const mediaModel = mediaFactory(relatedMedia);
     const media = mediaModel.generateMediaGrid();
     mediasGrid.appendChild(media);
-    media.addEventListener('click', () => {
+    media.children[0].addEventListener('click', () => {
       showLightbox(mediaModel, relatedMedias, relatedMedia);
     });
   });
+}
+
+function calculateLikes(medias) {
+  const likes = medias.reduce((accumulator, media) => {
+    return accumulator + media.likes;
+  }, 0);
+  return likes;
+}
+
+function generateLikeCounter(likes, price) {
+  const heartIcon = '/assets/icons/black-heart-icon.png';
+  const likeCounter = document.querySelector('.like-counter');
+  const div = document.createElement('div');
+  const p = document.createElement('p');
+  const icon = document.createElement('img');
+  const priceTextContainer = document.createElement('p');
+
+  icon.setAttribute('src', heartIcon);
+  p.textContent = likes;
+  priceTextContainer.textContent = `${price}€ / jour`;
+
+  icon.classList.add('heart-icon-black');
+
+  div.appendChild(p);
+  div.appendChild(icon);
+  likeCounter.appendChild(div);
+  likeCounter.appendChild(priceTextContainer);
 }
 
 async function init() {
@@ -71,8 +98,11 @@ async function init() {
     (media) => media.photographerId === parseInt(id)
   );
 
+  const likes = calculateLikes(relatedMedias);
+  generateLikeCounter(likes, photographer[0].price);
+
   displayHeader(photographer[0]);
-  displayMedias(relatedMedias);
+  displayMedias(sortMedias(relatedMedias, "trending"));
 
   filter.addEventListener('change', (e) => {
     const sortedMedias = sortMedias(relatedMedias, e.target.value);

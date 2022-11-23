@@ -1,12 +1,13 @@
 function showLightbox(mediaModel, relatedMedias, relatedMedia) {
   let currentMedia = relatedMedia;
   const main = document.getElementById('main');
-  const lightbox = document.getElementById('lightbox');
+  const lightboxContainer = document.getElementById('lightbox');
   const header = document.getElementById('header');
+  const lightbox = document.getElementById('lightbox-image-container');
 
   header.style.display = 'none';
   main.style.display = 'none';
-  lightbox.style.display = 'flex';
+  lightboxContainer.style.display = 'flex';
 
   removeMedia(lightbox);
 
@@ -16,29 +17,13 @@ function showLightbox(mediaModel, relatedMedias, relatedMedia) {
   const previousImageButton = document.getElementById('previous-image-button');
   const nextImageButton = document.getElementById('next-image-button');
 
-  checkPreviousButtonDisplay();
-  checkNextButtonDisplay();
-
-  function checkPreviousButtonDisplay() {
-    if (currentMedia.index === 0) {
-      previousImageButton.style.display = 'none';
-    } else {
-      previousImageButton.style.display = 'block';
-    }
-  }
-
-  function checkNextButtonDisplay() {
-    if (!findNextMedia(relatedMedias, currentMedia)) {
-      nextImageButton.style.display = 'none';
-    } else {
-      nextImageButton.style.display = 'block';
-    }
-  }
-
   function findPreviousMedia(relatedMedias, relatedMedia) {
     const mediaToDisplay = relatedMedias.filter(
       (media) => media.index === relatedMedia.index - 1
     );
+    if (!mediaToDisplay[0]) {
+      return relatedMedias[relatedMedias.length - 1];
+    }
     return mediaToDisplay[0];
   }
 
@@ -46,6 +31,9 @@ function showLightbox(mediaModel, relatedMedias, relatedMedia) {
     const mediaToDisplay = relatedMedias.filter(
       (media) => media.index === relatedMedia.index + 1
     );
+    if (!mediaToDisplay[0]) {
+      return relatedMedias[0];
+    }
     return mediaToDisplay[0];
   }
 
@@ -56,7 +44,6 @@ function showLightbox(mediaModel, relatedMedias, relatedMedia) {
     const mediaToDisplay = mediaModel.generateLightboxMedia();
     lightbox.appendChild(mediaToDisplay);
     currentMedia = previousMedia;
-    checkPreviousButtonDisplay();
     nextImageButton.style.display = 'block';
   }
 
@@ -67,8 +54,6 @@ function showLightbox(mediaModel, relatedMedias, relatedMedia) {
     const mediaToDisplay = mediaModel.generateLightboxMedia();
     lightbox.appendChild(mediaToDisplay);
     currentMedia = nextMedia;
-    checkNextButtonDisplay();
-    checkPreviousButtonDisplay();
   }
 
   previousImageButton.addEventListener('click', () => {
@@ -80,10 +65,10 @@ function showLightbox(mediaModel, relatedMedias, relatedMedia) {
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft' && currentMedia.index !== 0) {
+    if (e.key === 'ArrowLeft') {
       displayPreviousMedia();
     }
-    if (e.key === 'ArrowRight' && findNextMedia(relatedMedias, currentMedia)) {
+    if (e.key === 'ArrowRight') {
       displayNextMedia();
     }
     if (e.key === 'Escape') {

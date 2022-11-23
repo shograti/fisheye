@@ -11,7 +11,9 @@
 
 <body>
   <header id="header">
-    <img src="assets/images/logo.png" class="logo" />
+    <a href="/">
+      <img src="assets/images/logo.png" class="logo" />
+    </a>
   </header>
   <main id="main">
     <section class="photograph-header">
@@ -34,14 +36,24 @@
       </div>
     </section>
 
+    <div class="like-counter">
+
+    </div>
   </main>
 
+
   <div class="lightbox" id="lightbox">
-    <img src="./assets/icons/close.svg" aria-label="Fermer la lightbox" alt="" class="close-icon">
     <img src="./assets/icons/chevron-left.png" aria-label="Photo précédente" id="previous-image-button"
       class="chevron-left" alt="Précédent">
-    <img src="./assets/icons/chevron-right.png" aria-label="Photo suivante" id="next-image-button" class="chevron-right"
-      alt="Suivant">
+
+    <div class="lightbox-image-container" id="lightbox-image-container">
+
+    </div>
+    <div class="lightbox-right-column">
+      <img src="./assets/icons/close.svg" aria-label="Fermer la lightbox" alt="" class="close-icon">
+      <img src="./assets/icons/chevron-right.png" aria-label="Photo suivante" id="next-image-button"
+        class="chevron-right" alt="Suivant">
+    </div>
   </div>
 
 
@@ -72,6 +84,7 @@
   <script src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/components/lightbox.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/components/likeCounter.js"></script>
 </body>
 
 </html>

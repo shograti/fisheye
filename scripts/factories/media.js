@@ -27,6 +27,12 @@ function mediaFactory(data) {
     likesContainer.classList.add('likes-container');
     icon.classList.add('heart-icon');
 
+    likesContainer.addEventListener('click', () => {
+      if (parseInt(likesText.textContent) === likes) {
+        likesText.textContent = parseInt(likesText.textContent) + 1;
+      }
+    });
+
     if (image) {
       const img = document.createElement('img');
       img.setAttribute('src', imageMedia);
@@ -60,5 +66,11 @@ function mediaFactory(data) {
     }
   }
 
-  return { id, imageMedia, videoMedia, generateMediaGrid, generateLightboxMedia };
+  return {
+    id,
+    imageMedia,
+    videoMedia,
+    generateMediaGrid,
+    generateLightboxMedia,
+  };
 }

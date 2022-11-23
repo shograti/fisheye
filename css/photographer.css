@@ -2,10 +2,6 @@
     display: none;
 }
 
-header {
-    max-width: 1263px;
-    margin-left: 70px;
-}
 
 section {
     margin: 0 auto;
@@ -113,27 +109,36 @@ section {
 .medias-grid article .text-container {
     display: flex;
     justify-content: space-between;
+
 }
+
 
 .medias-grid article .text-container h3 {
     font-weight: 400;
     font-size: 24px;
     line-height: 31px;
     color: #911C1C;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 .likes-container {
     display: flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 0.3em;
     color: #911C1C;
-    font-weight: 500;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .heart-icon {
     width: 17.5px;
     height: 18.35px;
 }
+
 
 /* Lightbox */
 
@@ -148,32 +153,29 @@ section {
     display: none;
     align-items: center;
     justify-content: center;
+    gap: 2em;
+}
+
+.lightbox-right-column {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .close-icon {
-    cursor: pointer;
     position: absolute;
-    right: 360px;
-    top: 30px;
+    top: 50px;
+    cursor: pointer;
 }
 
 .chevron-right,
 .chevron-left {
-    position: absolute;
     cursor: pointer;
-    top: 50%;
-    transform: translateX(-50%);
 }
 
-.chevron-right {
-    right: 340px;
-
-}
-
-.chevron-left {
-    left: 360px;
-
-}
 
 .lightbox-media {
     width: 1050px;
@@ -270,4 +272,28 @@ form input {
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Like counter */
+
+.like-counter {
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+    background-color: #DB8876;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    font-size: 1.2rem;
+    justify-content: center;
+    padding: 1em;
+    font-size: 600;
+    border-radius: 5px;
+}
+
+.like-counter>div {
+    display: flex;
+    gap: 0.6em;
+    align-items: center;
 }

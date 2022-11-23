@@ -51,5 +51,6 @@ function photographerFactory(data) {
     return { article, img };
   }
 
+
   return { name, picture, generateUserCard, generateUserHeader };
 }
