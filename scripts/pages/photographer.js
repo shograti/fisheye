@@ -70,6 +70,7 @@ function generateLikeCounter(likes, price) {
   const priceTextContainer = document.createElement("p");
 
   icon.setAttribute("src", heartIcon);
+  icon.setAttribute('alt',"Total likes")
   p.textContent = parseInt(likes);
   p.setAttribute("id", "global-likes");
   priceTextContainer.textContent = `${price}€ / jour`;

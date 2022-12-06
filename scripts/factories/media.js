@@ -16,6 +16,8 @@ function mediaFactory(data) {
     likesText.textContent = likes;
     h3.textContent = title;
     icon.setAttribute("src", heartIcon);
+    icon.setAttribute("alt", "Likes");
+    likesContainer.setAttribute("aria-label", "likes");
 
     likesContainer.appendChild(likesText);
     likesContainer.appendChild(icon);
@@ -39,6 +41,7 @@ function mediaFactory(data) {
       img.setAttribute("src", imageMedia);
       img.setAttribute("alt", title);
       img.classList.add("media");
+      img.setAttribute("aria-label", "Lilac breasted roller, closeup view");
       article.prepend(img);
       return article;
     }
@@ -48,7 +51,10 @@ function mediaFactory(data) {
       videoPlayer.setAttribute("src", videoMedia);
       videoPlayer.classList.add("media");
       videoPlayer.setAttribute("title", title);
-
+      videoPlayer.setAttribute(
+        "aria-label",
+        "Lilac breasted roller, closeup view",
+      );
       article.prepend(videoPlayer);
       return article;
     }
@@ -60,6 +66,7 @@ function mediaFactory(data) {
       media.setAttribute("src", imageMedia);
       media.setAttribute("alt", title);
       media.classList.add("lightbox-media");
+      media.setAttribute("aria-label", "Lilac breasted roller");
       return media;
     }
 
@@ -67,6 +74,7 @@ function mediaFactory(data) {
       const media = document.createElement("video");
       media.setAttribute("src", videoMedia);
       media.setAttribute("title", title);
+      media.setAttribute("aria-label", "Lilac breasted roller");
       media.classList.add("lightbox-media");
       return media;
     }
