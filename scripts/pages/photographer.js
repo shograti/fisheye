@@ -1,23 +1,23 @@
 async function getData() {
-  const data = await fetch('../../data/photographers.json');
+  const data = await fetch("../../data/photographers.json");
   return data.json();
 }
 
 function sortMedias(relatedMedias, option) {
   switch (option) {
-    case 'trending':
+    case "trending":
       return relatedMedias.sort((a, b) => b.likes - a.likes);
-    case 'date':
+    case "date":
       return relatedMedias.sort((a, b) =>
         new Date(a.date) > new Date(b.date)
           ? 1
           : new Date(b.title) > new Date(a.title)
           ? -1
-          : 0
+          : 0,
       );
-    case 'title':
+    case "title":
       return relatedMedias.sort((a, b) =>
-        a.title > b.title ? 1 : b.title > a.title ? -1 : 0
+        a.title > b.title ? 1 : b.title > a.title ? -1 : 0,
       );
     default:
       return relatedMedias.sort((a, b) => b.likes - a.likes);
@@ -31,7 +31,7 @@ function removeMedias(container) {
 }
 
 async function displayHeader(photographer) {
-  const photographHeader = document.querySelector('.photograph-header');
+  const photographHeader = document.querySelector(".photograph-header");
   const photographerModel = photographerFactory(photographer);
   const { article, img } = photographerModel.generateUserHeader();
   photographHeader.prepend(article);
@@ -39,7 +39,7 @@ async function displayHeader(photographer) {
 }
 
 async function displayMedias(relatedMedias) {
-  const mediasGrid = document.querySelector('.medias-grid');
+  const mediasGrid = document.querySelector(".medias-grid");
 
   removeMedias(mediasGrid);
 
@@ -48,7 +48,7 @@ async function displayMedias(relatedMedias) {
     const mediaModel = mediaFactory(relatedMedia);
     const media = mediaModel.generateMediaGrid();
     mediasGrid.appendChild(media);
-    media.children[0].addEventListener('click', () => {
+    media.children[0].addEventListener("click", () => {
       showLightbox(mediaModel, relatedMedias, relatedMedia);
     });
   });
@@ -62,18 +62,19 @@ function calculateLikes(medias) {
 }
 
 function generateLikeCounter(likes, price) {
-  const heartIcon = '/assets/icons/black-heart-icon.png';
-  const likeCounter = document.querySelector('.like-counter');
-  const div = document.createElement('div');
-  const p = document.createElement('p');
-  const icon = document.createElement('img');
-  const priceTextContainer = document.createElement('p');
+  const heartIcon = "/assets/icons/black-heart-icon.png";
+  const likeCounter = document.querySelector(".like-counter");
+  const div = document.createElement("div");
+  const p = document.createElement("p");
+  const icon = document.createElement("img");
+  const priceTextContainer = document.createElement("p");
 
-  icon.setAttribute('src', heartIcon);
-  p.textContent = likes;
+  icon.setAttribute("src", heartIcon);
+  p.textContent = parseInt(likes);
+  p.setAttribute("id", "global-likes");
   priceTextContainer.textContent = `${price}€ / jour`;
 
-  icon.classList.add('heart-icon-black');
+  icon.classList.add("heart-icon-black");
 
   div.appendChild(p);
   div.appendChild(icon);
@@ -81,21 +82,27 @@ function generateLikeCounter(likes, price) {
   likeCounter.appendChild(priceTextContainer);
 }
 
+function updateGlobalLikes() {
+  const likesContainer = document.getElementById("global-likes");
+  let actualLikes = likesContainer.textContent;
+  likesContainer.textContent = parseInt(actualLikes) + 1;
+}
+
 async function init() {
-  const filter = document.getElementById('filter');
-  const lightboxCloseIcon = document.querySelector('.close-icon');
+  const filter = document.getElementById("filter");
+  const lightboxCloseIcon = document.querySelector(".close-icon");
   const { photographers, medias } = await getData();
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('id');
+  const id = urlParams.get("id");
 
   const photographer = photographers.filter(
-    (photographer) => photographer.id === parseInt(id)
+    (photographer) => photographer.id === parseInt(id),
   );
 
   const relatedMedias = medias.filter(
-    (media) => media.photographerId === parseInt(id)
+    (media) => media.photographerId === parseInt(id),
   );
 
   const likes = calculateLikes(relatedMedias);
@@ -104,14 +111,15 @@ async function init() {
   displayHeader(photographer[0]);
   displayMedias(sortMedias(relatedMedias, "trending"));
 
-  filter.addEventListener('change', (e) => {
+  filter.addEventListener("change", (e) => {
     const sortedMedias = sortMedias(relatedMedias, e.target.value);
     displayMedias(sortedMedias);
   });
 
-  lightboxCloseIcon.addEventListener('click', () => {
+  lightboxCloseIcon.addEventListener("click", () => {
     hideLightbox();
   });
+  updateGlobalLikes();
 }
 
 init();
