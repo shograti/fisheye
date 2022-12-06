@@ -37,6 +37,7 @@ function mediaFactory(data) {
     if (image) {
       const img = document.createElement("img");
       img.setAttribute("src", imageMedia);
+      img.setAttribute("alt", title);
       img.classList.add("media");
       article.prepend(img);
       return article;
@@ -46,6 +47,8 @@ function mediaFactory(data) {
       const videoPlayer = document.createElement("video");
       videoPlayer.setAttribute("src", videoMedia);
       videoPlayer.classList.add("media");
+      videoPlayer.setAttribute("title", title);
+
       article.prepend(videoPlayer);
       return article;
     }
@@ -55,6 +58,7 @@ function mediaFactory(data) {
     if (image) {
       const media = document.createElement("img");
       media.setAttribute("src", imageMedia);
+      media.setAttribute("alt", title);
       media.classList.add("lightbox-media");
       return media;
     }
@@ -62,6 +66,7 @@ function mediaFactory(data) {
     if (video) {
       const media = document.createElement("video");
       media.setAttribute("src", videoMedia);
+      media.setAttribute("title", title);
       media.classList.add("lightbox-media");
       return media;
     }
